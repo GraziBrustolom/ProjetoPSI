@@ -1,0 +1,187 @@
+
+<div [hidden]="!logged">
+  
+
+  <div class="row">
+    <div class="col s12 ">
+      <ul class="tabs" >
+        <li class="tab col s3 "><a class="black-text" href="#test1">Cães Cadastrados</a></li>
+        <li class="tab col s3"><a class="black-text" href="#test2">Cadastrar</a></li>
+        <li class="tab col s3"><a class="black-text" href="#test3">Solicitações</a></li>
+        <div class="indicator black" style="z-index:1"></div>
+      </ul>
+    </div>
+
+
+    <div id="test1" class="col s12">
+
+
+
+ <table class="centered striped" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Idade</th>
+      <th scope="col">Raça</th>
+      <th scope="col">Vacinado</th>
+      <th scope="col" >Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let objt of caesTest" >
+      <td>{{objt.nome}}</td>
+      <td>{{objt.idade}}</td>
+      <td>{{objt.raca}}</td>
+      <td>{{objt.vacinado}}</td>
+      <td>
+        <a class="btn-floating waves-effect waves-light grey darken-4" (click)="remover(objt)"><i onclick="Materialize.toast('Removido.', 4000)" class="material-icons">remove</i></a>
+        <!-- Modal Trigger -->   
+        <a class="btn modal-trigger btn-floating waves-effect waves-light grey darken-4 " (click)="getCaoData(objt)" data-target='demoModal' style="margin-left:5px"><i class="material-icons">edit</i></a>
+<!-- Modal Structure -->
+<div id="demoModal" class="modal" materialize="modal">
+    <div class="modal-content">
+        <h4>Editar</h4>
+        <div class="row" style="margin-top:50px">
+  <div class="col s4 offset-m4">
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Nome</span>
+    <input type="text"  [(ngModel)]="auxCao.nome" aria-describedby="basic-addon1">
+
+    <span class="input-group-addon" id="basic-addon1">Idade</span>
+    <input type="text" [(ngModel)]="auxCao.idade" aria-describedby="basic-addon1">
+
+    <span class="input-group-addon" id="basic-addon1">Raça</span>
+    <input type="text"  [(ngModel)]="auxCao.raca" aria-describedby="basic-addon1">
+
+      <span class="input-group-addon" id="basic-addon1">Vacinado</span>
+      <input type="text"  [(ngModel)]="auxCao.vacinado" aria-describedby="basic-addon1">
+
+
+  
+</div>
+<div class="row ">
+<div class="col s12">
+<button type="button" class=" modal-close btn-large btn-outline-secondary grey darken-4" style="margin-top:50px" (click)="editar(auxCao)" onclick="Materialize.toast('Alterações Salvas.', 4000)">Salvar</button>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    <div class="modal-footer">
+        <a class=" modal-close waves-effect waves-green btn-flat">Fechar</a>
+    </div>
+</div> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+    <div id="test2" class="col s12">
+
+<div class="row" style="margin-top:50px">
+  <div class="col s4 offset-m4">
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Nome</span>
+    <input type="text" [(ngModel)]="newCao.nome" aria-describedby="basic-addon1">
+
+    <span class="input-group-addon" id="basic-addon1">Idade</span>
+    <input type="text" [(ngModel)]="newCao.idade" aria-describedby="basic-addon1">
+
+    <span class="input-group-addon" id="basic-addon1">Raça</span>
+    <input type="text" [(ngModel)]="newCao.raca" aria-describedby="basic-addon1">
+
+      <span class="input-group-addon" id="basic-addon1">Vacinado</span>
+      <input type="text" [(ngModel)]="newCao.vacinado" aria-describedby="basic-addon1">
+
+
+  
+</div>
+<div class="row ">
+<div class="col s10 offset-m4">
+<button type="button" class="btn-large btn-outline-secondary grey darken-4" style="margin-top:50px" onclick="Materialize.toast('Cadastrado.', 4000)" (click)="adicionar(newCao)">Cadastrar</button>
+</div>
+</div>
+
+
+</div>
+</div>
+    </div>
+    <div id="test3" class="col s12">
+
+       <table class="centered striped" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th scope="col">Solicitante</th>
+      <th scope="col">Telefone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Cão</th>
+      <th scope="col" >Código do Animal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let slct of solicitacoes" >
+      <td>{{slct.nomeSolicitante}}</td>
+      <td>{{slct.telefone}}</td>
+      <td>{{slct.email}}</td>
+      <td>{{slct.caoNome}}</td>
+      <td>{{slct.caoId}}</td>
+      <td>
+        <!-- Modal Trigger -->   
+        <a class="btn modal-trigger btn-floating waves-effect waves-light grey darken-4 " (click)="getSlctData(slct)" data-target='slctModal' style="margin-left:5px"><i class="material-icons">open_in_new</i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+    </div>
+
+  </div>
+
+
+<!-- Modal Structure -->
+<div id="slctModal" class="modal" materialize="modal">
+    <div class="modal-content">
+        <h4>Solicitação</h4>
+        <div class="row" style="margin-top:50px">
+
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Nome</span>
+        <input type="text" disabled [(ngModel)]="auxSlct.nomeSolicitante" aria-describedby="basic-addon1">
+
+        <span class="input-group-addon" id="basic-addon1">Telefone</span>
+        <input type="text" disabled [(ngModel)]="auxSlct.telefone" aria-describedby="basic-addon1">
+
+        <span class="input-group-addon" id="basic-addon1">Email</span>
+        <input type="text" disabled [(ngModel)]="auxSlct.email" aria-describedby="basic-addon1">
+
+        <span class="input-group-addon" id="basic-addon1">Cão</span>
+        <input type="text" disabled [(ngModel)]="auxSlct.caoNome" aria-describedby="basic-addon1">
+
+        <span class="input-group-addon" id="basic-addon1">Código do Animal</span>
+        <input type="text" disabled [(ngModel)]="auxSlct.caoId" aria-describedby="basic-addon1">
+    </div>
+
+
+           
+<div class="row ">
+<div class="col s6 offset-m4">
+<button type="button" class=" modal-close btn-large btn-outline-secondary teal darken-2" style="margin-top:50px" (click)="updateRequest(true, auxSlct)" onclick="Materialize.toast('Solicitação Aprovada.', 4000)">Aprovar</button>
+<button type="button" class=" modal-close btn-large btn-outline-secondary red darken-2" style="margin-top:50px" (click)="updateRequest(false, auxSlct)" onclick="Materialize.toast('Solicitação Reprovada.', 4000)">Reprovar</button>
+</div>
+</div>
+
+</div>
+    </div>
+    <div class="modal-footer">
+        <a class=" modal-close waves-effect waves-green btn-flat">Fechar</a>
+    </div>
+</div> 
+</div>
+ 
+ 
+
